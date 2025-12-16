@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@keyframes ar-ring-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes ar-inner-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes ar-dot-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.9;
+  }
+}
+
+.ar-ring {
+  animation: ar-ring-pulse 2.5s ease-out infinite;
+  border: 2px solid #d6b46c;
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
+
+.ar-inner-ring {
+  animation: ar-inner-breathe 2s ease-in-out infinite;
+  border: 1.5px solid #d6b46c;
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
+
+.ar-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #d6b46c;
+  border-radius: 50%;
+  animation: ar-dot-pulse 1.4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
