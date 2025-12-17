@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null); 
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
-  const [captured, setCaptured] = useState(false); 
+  const [captured, setCaptured] = useState(false);
 
   const handleOpenCamera = async () => {
     try {
@@ -41,12 +41,14 @@ export default function Page() {
     canvas.height = video.videoHeight;
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      return
+    }
 
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     const imageBase64 = canvas.toDataURL("image/jpeg", 0.85);
-    console.log("📸 Auto captured image", imageBase64);
+    console.log("Auto captured image", imageBase64);
 
     setCaptured(true);
   };
@@ -56,14 +58,12 @@ export default function Page() {
 
       <video
         ref={videoRef}
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-          stream ? "opacity-100" : "opacity-0"
-        }`}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${stream ? "opacity-100" : "opacity-0"
+          }`}
         playsInline
         muted
       />
 
-      {/* Hidden canvas */}
       <canvas ref={canvasRef} className="hidden" />
 
       {!stream && (
@@ -102,7 +102,7 @@ export default function Page() {
               className="relative px-16 py-3
               bg-[#d6b46c] text-black font-semibold
               rounded-xl shadow-lg
-              hover:scale-105 transition-transform duration-300"
+              hover:scale-105 transition-transform duration-300 cursor-pointer"
             >
               Scan Now
             </button>
