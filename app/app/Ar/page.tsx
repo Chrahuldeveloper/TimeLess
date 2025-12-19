@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import SwipeButton from "../components/SwipeButton";
 
 export default function Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -56,13 +57,17 @@ export default function Page() {
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black">
 
-      <video
-        ref={videoRef}
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${stream ? "opacity-100" : "opacity-0"
-          }`}
-        playsInline
-        muted
-      />
+      <div className="relative w-full h-full">
+        <video
+          ref={videoRef}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${stream ? "opacity-100" : "opacity-0"}`}
+          playsInline
+          muted
+        />
+       <div className={`${stream ? "opacity-100" : "opacity-0"}`}>
+        <SwipeButton/>
+       </div>
+      </div>
 
       <canvas ref={canvasRef} className="hidden" />
 
