@@ -65,7 +65,7 @@ export default function Page() {
           muted
         />
        <div className={`${stream ? "opacity-100" : "opacity-0"}`}>
-        <SwipeButton/>
+        <SwipeButton />
        </div>
       </div>
 

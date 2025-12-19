@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 interface SwipeButtonProps {
   onSwipe?: () => void;
@@ -15,19 +15,25 @@ export default function SwipeButton({ onSwipe }: SwipeButtonProps) {
     setDragging(true);
   };
 
-  const onDrag = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!dragging || !trackRef.current) return;
 
-    const trackRect = trackRef.current.getBoundingClientRect();
-    const clientX =
-      "touches" in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
 
-    let newOffset = clientX - trackRect.left - 25; // 25 = handle radius
-    newOffset = Math.max(0, Math.min(newOffset, trackRect.width - 50)); // 50 = handle width
+  const onDrag = (e:React.MouseEvent | React.TouchEvent) =>{
+
+    if(!dragging || !trackRef.current){
+      return;
+    }
+
+    const trackSize = trackRef.current.getBoundingClientRect();
+
+    const clientX = "touches" in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
+
+    let newOffset = clientX - trackSize.left - 25;
+    newOffset = Math.max(0, Math.min(newOffset, trackSize.width - 50)); 
     setOffset(newOffset);
-  };
 
-  const endDrag = () => {
+  }
+
+    const endDrag = () => {
     if (!trackRef.current) return;
     if (offset >= trackRef.current.offsetWidth - 50) {
       onSwipe?.();
@@ -35,6 +41,7 @@ export default function SwipeButton({ onSwipe }: SwipeButtonProps) {
     setOffset(0);
     setDragging(false);
   };
+
 
   return (
     <div
