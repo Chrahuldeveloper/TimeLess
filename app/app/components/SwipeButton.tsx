@@ -15,8 +15,6 @@ export default function SwipeButton({ onSwipe }: SwipeButtonProps) {
     setDragging(true);
   };
 
-
-
   const onDrag = (e:React.MouseEvent | React.TouchEvent) =>{
 
     if(!dragging || !trackRef.current){
