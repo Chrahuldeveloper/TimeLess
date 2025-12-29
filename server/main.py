@@ -2,7 +2,6 @@ from fastapi import FastAPI
 import tensorflow as tf
 import numpy as np 
 import json 
-import os
 from tensorflow.keras.preprocessing import image 
 
 app = FastAPI()
