@@ -3,8 +3,17 @@ import tensorflow as tf
 import numpy as np 
 import json 
 from tensorflow.keras.preprocessing import image 
-
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 model = tf.keras.models.load_model("TimeLessAi_Model.h5")
 print("model loaded")

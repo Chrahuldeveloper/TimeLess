@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import SwipeButton from "../components/SwipeButton";
-
+import axios from "axios";
 export default function Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -50,9 +50,24 @@ export default function Page() {
 
     const imageBase64 = canvas.toDataURL("image/jpeg", 0.85);
     console.log("Auto captured image", imageBase64);
-
+    handlePredictMonument()
     setCaptured(true);
   };
+
+  const handlePredictMonument = async ()=>{
+
+    try {
+     const res = await axios.get("http://127.0.0.1:8000/detect")
+     console.log(res.data)
+      
+    } catch (error) {
+      console.log(error)
+    }
+
+
+
+
+  }
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black">
