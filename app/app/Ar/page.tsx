@@ -2,11 +2,15 @@
 import { useEffect, useRef, useState } from "react";
 import SwipeButton from "../components/SwipeButton";
 import axios from "axios";
+
+
 export default function Page() {
+
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [captured, setCaptured] = useState(false);
+
 
   const handleOpenCamera = async () => {
     try {
@@ -22,13 +26,9 @@ export default function Page() {
 
   useEffect(() => {
     if (videoRef.current && stream) {
-      videoRef.current.srcObject = stream;
-      videoRef.current.muted = true;
-      videoRef.current.play();
-
-      setTimeout(() => {
-        captureFrame();
-      }, 1500);
+        videoRef.current.srcObject = stream;
+        videoRef.current.muted = true;
+        videoRef.current.play();
     }
   }, [stream]);
 
@@ -50,24 +50,37 @@ export default function Page() {
 
     const imageBase64 = canvas.toDataURL("image/jpeg", 0.85);
     console.log("Auto captured image", imageBase64);
-    handlePredictMonument()
+    handleUploadToAzure(imageBase64)
     setCaptured(true);
   };
 
-  const handlePredictMonument = async ()=>{
 
-    try {
-     const res = await axios.get("http://127.0.0.1:8000/detect")
-     console.log(res.data)
-      
-    } catch (error) {
-      console.log(error)
-    }
-
-
-
-
+const handleUploadToAzure = async (imageBase64: string) => {
+  try {
+    const res = await axios.post("/api/upload",{
+      imageBase64
+    })
+    const {data} = res;
+    console.log(data)
+    if (res.status) alert("Image uploaded: ");
+    else alert("Upload failed: " + data.error);
+  } catch (err) {
+    console.error(err);
+    alert("Upload failed: " + err);
   }
+};
+
+
+  // const handlePredictMonument = async ()=>{
+
+  //   try {
+  //    const res = await axios.get("http://127.0.0.1:8000/detect")
+  //    console.log(res.data)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+
+  // }
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black">
@@ -80,7 +93,7 @@ export default function Page() {
           muted
         />
        <div className={`${stream ? "opacity-100" : "opacity-0"}`}>
-        <SwipeButton />
+        <SwipeButton onSwipe={captureFrame}/>
        </div>
       </div>
 

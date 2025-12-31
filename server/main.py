@@ -16,14 +16,9 @@ app.add_middleware(
 )
 
 model = tf.keras.models.load_model("TimeLessAi_Model.h5")
-print("model loaded")
-
 
 with open("class_names.json","r") as f:
     class_names = json.load(f)
-
-print(class_names)
-
 
 @app.get("/detect")
 def predict():
