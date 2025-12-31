@@ -43,7 +43,7 @@ export default function SwipeButton({ onSwipe }: SwipeButtonProps) {
 
   return (
     <div
-      className="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-64 h-12 bg-gray-700 rounded-full flex items-center px-1 select-none"
+      className="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-64 h-12 bg-[#242b2b] rounded-full flex items-center px-1 select-none"
       ref={trackRef}
       onMouseMove={onDrag}
       onMouseUp={endDrag}
@@ -52,15 +52,15 @@ export default function SwipeButton({ onSwipe }: SwipeButtonProps) {
       onTouchEnd={endDrag}
     >
       <div
-        className="absolute w-full text-center text-white font-medium pointer-events-none"
+        className="absolute w-full text-sm text-center text-white font-medium pointer-events-none"
       >
-        SWIPE TO CAPTURE
+      SWIPE TO CAPTURE
       </div>
       <div
         ref={handleRef}
         onMouseDown={startDrag}
         onTouchStart={startDrag}
-        className="w-12 h-12 bg-white rounded-full shadow-md z-10"
+        className="w-10 h-10 bg-[#ddfc55] rounded-full shadow-md z-10"
         style={{ transform: `translateX(${offset}px)` }}
       />
     </div>
