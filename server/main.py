@@ -4,7 +4,6 @@ import requests
 import cv2
 import numpy as np 
 import json 
-from tensorflow.keras.preprocessing import image 
 from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
