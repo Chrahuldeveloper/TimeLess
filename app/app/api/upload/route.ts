@@ -24,7 +24,11 @@ export async function POST(req: NextRequest) {
 
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
-        await blockBlobClient.uploadData(imageBuffer);
+        await blockBlobClient.uploadData(imageBuffer,{
+            blobHTTPHeaders : {
+                blobContentType : "image/jpeg"
+            }
+        });
 
         const imageUrl = `https://monumentimages.blob.core.windows.net/${containerName}/${blobName}`;
 

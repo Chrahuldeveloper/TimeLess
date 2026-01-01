@@ -26,9 +26,9 @@ export default function Page() {
 
   useEffect(() => {
     if (videoRef.current && stream) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.muted = true;
-        videoRef.current.play();
+      videoRef.current.srcObject = stream;
+      videoRef.current.muted = true;
+      videoRef.current.play();
     }
   }, [stream]);
 
@@ -55,32 +55,38 @@ export default function Page() {
   };
 
 
-const handleUploadToAzure = async (imageBase64: string) => {
-  try {
-    const res = await axios.post("/api/upload",{
-      imageBase64
-    })
-    const {data} = res;
-    console.log(data)
-    if (res.status) alert("Image uploaded: ");
-    else alert("Upload failed: " + data.error);
-  } catch (err) {
-    console.error(err);
-    alert("Upload failed: " + err);
+  const handleUploadToAzure = async (imageBase64: string) => {
+    try {
+      const res = await axios.post("/api/upload", {
+        imageBase64
+      })
+      const { data } = res;
+      console.log(data.url)
+      if (res.status) {
+        alert("Image uploaded:")
+        handlePredictMonument(data.url)
+      }
+      else {
+        alert("Upload failed: " + data.error);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Upload failed: " + err);
+    }
+  };
+
+
+  const handlePredictMonument = async (url: string) => {
+    try {
+      const res = await axios.post("http://127.0.0.1:8000/detect", {
+        url
+      })
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+
   }
-};
-
-
-  // const handlePredictMonument = async ()=>{
-
-  //   try {
-  //    const res = await axios.get("http://127.0.0.1:8000/detect")
-  //    console.log(res.data)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-
-  // }
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black">
@@ -92,9 +98,9 @@ const handleUploadToAzure = async (imageBase64: string) => {
           playsInline
           muted
         />
-       <div className={`${stream ? "opacity-100" : "opacity-0"}`}>
-        <SwipeButton onSwipe={captureFrame}/>
-       </div>
+        <div className={`${stream ? "opacity-100" : "opacity-0"}`}>
+          <SwipeButton onSwipe={captureFrame} />
+        </div>
       </div>
 
       <canvas ref={canvasRef} className="hidden" />
