@@ -1,6 +1,3 @@
-
-
-
 import { NextRequest, NextResponse } from "next/server";
 import { BlobServiceClient } from "@azure/storage-blob"
 
@@ -33,12 +30,9 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({ message: "Uploaded Sucessfully", url: imageUrl }, { status: 200 })
 
-
     } catch (error) {
         console.log(error)
         return NextResponse.json({ error: "upload failed" }, { status: 500 })
     }
-
-
 
 }
