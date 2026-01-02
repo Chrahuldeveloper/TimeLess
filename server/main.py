@@ -27,7 +27,7 @@ async def predict(req: Request):
     url = body.get("url")
 
     resp = requests.get(url)
-    img_bytes = np.frombuffer(resp.content, np.uint8)
+    img_bytes = np.frombuffer(resp.content,np.uint8) 
     img = cv2.imdecode(img_bytes, cv2.IMREAD_COLOR)
     img = cv2.resize(img, (224, 224))
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)

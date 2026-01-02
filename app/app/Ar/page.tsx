@@ -10,7 +10,7 @@ export default function Page() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [captured, setCaptured] = useState(false);
-
+  const [isShowTimeLine, setisShowTimeLine] = useState<number>(0);
 
   const handleOpenCamera = async () => {
     try {
@@ -82,11 +82,15 @@ export default function Page() {
         url
       })
       console.log(res.data)
+      setisShowTimeLine(new Date().getFullYear());
     } catch (error) {
       console.log(error)
     }
 
   }
+
+  const [year, setYear] = useState(1500);
+  const timelines = [1500, 1625, 1750, 1875, 2000];
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black">
@@ -98,9 +102,52 @@ export default function Page() {
           playsInline
           muted
         />
-        <div className={`${stream ? "opacity-100" : "opacity-0"}`}>
-          <SwipeButton onSwipe={captureFrame} />
-        </div>
+        {
+          isShowTimeLine > 0 ? <>
+            <div
+              className={`transition-opacity duration-300 ${stream ? "opacity-100" : "opacity-0"
+                }`}
+            >
+              <div className="w-[60vw] absolute bottom-10 left-1/2 transform -translate-x-1/2">
+                <input
+                  type="range"
+                  min={1500}
+                  max={2000}
+                  step={125}
+                  value={year}
+                  onChange={(e) => setYear(Number(e.target.value))}
+                  className="
+              w-full
+              h-2
+              appearance-none
+              rounded-full
+              bg-[#242b2b]
+              cursor-pointer
+            "
+                />
+
+                <div className="flex justify-between text-sm mt-2">
+                  {timelines.map((t) => (
+                    <span
+                      key={t}
+                      className={t === year ? "font-bold text-white" : "opacity-60 text-slate-400"}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+
+          </> : <div className={`${stream ? "opacity-100" : "opacity-0"}`}>
+            <SwipeButton onSwipe={captureFrame} />
+          </div>
+        }
+
+
+
+
       </div>
 
       <canvas ref={canvasRef} className="hidden" />
