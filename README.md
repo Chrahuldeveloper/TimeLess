@@ -21,7 +21,6 @@ By pointing their phone camera at a **real historical monument**, the app replac
 * 🏗️ **Historical 3D Reconstructions** – Accurate models of monuments from the past
 * 🌍 **Context-Preserved Environment** – Only the monument changes, not the surroundings
 * 🎓 **Educational Experience** – Learn history visually, not just through text
-* 📱 **Mobile-First Design** – Optimized for smartphones
 
 ---
 
