@@ -1,6 +1,6 @@
 # TimeLess ⏳📱
 
-TimeLess is an **AR (Augmented Reality) mobile application** that lets users experience history in real time.
+TimeLess is an **AR (Augmented Reality) Web application** that lets users experience history in real time.
 
 By pointing their phone camera at a **real historical monument**, the app replaces the present-day structure with a **3D reconstruction of how it looked in the past**, while keeping the **real-world surroundings unchanged**.
 
