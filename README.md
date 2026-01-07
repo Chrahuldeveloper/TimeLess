@@ -39,7 +39,7 @@ By pointing their phone camera at a **real historical monument**, the app replac
 * **Frontend:** React Native / Unity
 * **AR:** ARCore (Android), ARKit (iOS), WebXR (optional)
 * **3D Models:** Blender / GLTF / GLB
-* **Backend:** Node.js / Firebase
+* **Backend:** FastApi
 * **Cloud Storage:** For 3D assets and metadata
 
 ---
