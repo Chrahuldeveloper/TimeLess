@@ -36,7 +36,7 @@ By pointing their phone camera at a **real historical monument**, the app replac
 
 ## 🛠️ Tech Stack (Planned / Example)
 
-* **Frontend:** React Native / Unity
+* **Frontend:** Nextjs 
 * **AR:** ARCore (Android), ARKit (iOS), WebXR (optional)
 * **3D Models:** Blender / GLTF / GLB
 * **Backend:** FastApi
