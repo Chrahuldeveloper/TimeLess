@@ -1,8 +1,16 @@
-import { View, Text, Image } from "react-native"
+import { View, Text, Image,ScrollView } from "react-native"
 import AntDesign from '@expo/vector-icons/AntDesign';
 import BottomNavbar from "@/components/BottomNavbar";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
+
+
 
 export default function Home() {
+
+
+
+      const navigation = useNavigation<any>();
 
     const cardsData = [
         {
@@ -22,15 +30,20 @@ export default function Home() {
             title: "Secure Web Systems",
             para: "Protect your platform with industry-standard security and performance optimizations.",
             tags: ["Done"]
-        }
+        },
+      
     ];
     return (
+        <SafeAreaView>
+
+       
         <View className="bg-[#fbfaf9] w-full h-full">
             <View className="p-4 ">
                 <Text className="text-2xl font-semibold">InBox</Text>
                 <Text className="pt-2 text-gray-500">2 pending · 1 processing</Text>
             </View>
 
+            <ScrollView className="mb-20">
             {
              cardsData.map((i, id) => {
                     return (
@@ -66,12 +79,18 @@ export default function Home() {
                     )
                 })
             }
+</ScrollView>
 
-                <View className="absolute bottom-20 right-6 bg-green-500 p-3 rounded-full shadow-lg">
-                <AntDesign name="plus" size={24} color="white" />
+                <View   className="absolute bottom-20 right-6 bg-green-500 p-3 rounded-full shadow-lg">
+                <AntDesign 
+                
+                onPress={() => navigation.navigate('DropImage')}
+                name="plus" size={24} color="white" />
                 </View>
 
 <BottomNavbar page="Home"/>
         </View>
+         </SafeAreaView>
+         
     )
 }

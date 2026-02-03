@@ -7,8 +7,8 @@ interface BottomNavbarProps {
 
 const navItems = [
   { label: "Home", icon: "home" },
-  { label: "About", icon: "home" },
-  { label: "Profile", icon: "home" }
+  { label: "About", icon: "link" },
+  { label: "Profile", icon: "profile" }
 ]
 
 export default function BottomNavbar({ page }: BottomNavbarProps) {
